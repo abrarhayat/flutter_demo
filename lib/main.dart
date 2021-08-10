@@ -4,17 +4,33 @@ import "package:flutter/material.dart";
 //   runApp(AbrarApp());
 // }
 
-void main() => runApp(AbrarApp()); //shorthand syntax
+void main() => runApp(DemoApp()); //shorthand syntax
 
-class AbrarApp extends StatelessWidget {
+class DemoApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return DemoAppState();
+  }
+}
+
+class DemoAppState extends State {
+  //State to be used in a Stateful Widget
+  var questions = [
+    'What is your favourite editor?',
+    'React Native or Flutter?',
+    'Express or Apollo?'
+  ]; //type inferencing works by deafult
+  var questionIndex = 0;
   void submitAnswer() {
+    setState(() {
+      if (questionIndex < questions.length - 1) questionIndex++;
+    });
     print("Answer Submitted!");
   }
 
   @override
   Widget build(BuildContext context) {
     // List<String> questions = ['Q1', 'Q2'];
-    var questions = ['Q1', 'Q2']; //type inferencing works by deafult
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -24,17 +40,19 @@ class AbrarApp extends StatelessWidget {
         ),
         body: Column(
           children: [
+            Text(questions[questionIndex]),
             ElevatedButton(
-                onPressed: submitAnswer, child: Text("TestQ1")), //named func
+                onPressed: submitAnswer, child: Text("TestA1")), //named func
             ElevatedButton(
                 onPressed: () => print("Answer 2 chosen!"), //anonymous func 1
-                child: Text("TestQ2")),
+                child: Text("TestA2")),
             ElevatedButton(
-                onPressed: () { //anonymous func 2
+                onPressed: () {
+                  //anonymous func 2
                   // ...
-                  print("Answer 3chosen!");
+                  print("Answer 3 chosen!");
                 },
-                child: Text("TestQ3")),
+                child: Text("TestA3")),
           ],
         ),
         bottomNavigationBar: Text("Bottom Nav Bar Text"),
