@@ -9,21 +9,22 @@ void main() => runApp(DemoApp()); //shorthand syntax
 class DemoApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return DemoAppState();
+    return _DemoAppState();
   }
 }
 
-class DemoAppState extends State {
+class _DemoAppState extends State {
   //State to be used in a Stateful Widget
   var questions = [
     'What is your favourite editor?',
     'React Native or Flutter?',
     'Express or Apollo?'
   ]; //type inferencing works by deafult
-  var questionIndex = 0;
+  var _questionIndex = 0;
+
   void submitAnswer() {
     setState(() {
-      if (questionIndex < questions.length - 1) questionIndex++;
+      if (_questionIndex < questions.length - 1) _questionIndex++;
     });
     print("Answer Submitted!");
   }
@@ -40,7 +41,7 @@ class DemoAppState extends State {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
+            Text(questions[_questionIndex]),
             ElevatedButton(
                 onPressed: submitAnswer, child: Text("TestA1")), //named func
             ElevatedButton(
