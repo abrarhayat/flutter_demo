@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "./question.dart";
 
 // void main() {
 //   runApp(AbrarApp());
@@ -41,7 +42,7 @@ class _DemoAppState extends State {
         ),
         body: Column(
           children: [
-            Text(questions[_questionIndex]),
+            Question(questions[_questionIndex]),
             ElevatedButton(
                 onPressed: submitAnswer, child: Text("TestA1")), //named func
             ElevatedButton(
