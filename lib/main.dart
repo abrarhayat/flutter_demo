@@ -51,9 +51,13 @@ class _DemoAppState extends State {
 
   void _submitAnswer() {
     setState(() {
-      if (_questionIndex < questions.length - 1) _questionIndex++;
+      _questionIndex++;
     });
-    print("Answer Submitted!");
+    if (_questionIndex < questions.length) {
+      print("Answer Submitted!");
+      return;
+    }
+    print("Questionnaire completed!");
   }
 
   @override
@@ -66,15 +70,27 @@ class _DemoAppState extends State {
             "Test Appbar Title",
           ),
         ),
-        body: Column(
-          children: [
-            Question(questions[_questionIndex]['questionText'] as String),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answerText) {
-              return Answer(answerText, _submitAnswer);
-            }).toList(),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(questions[_questionIndex]['questionText'] as String),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answerText) {
+                    return Answer(answerText, _submitAnswer);
+                  }).toList(),
+                ],
+              )
+            : Column(children: [
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.all(10),
+                  child: Text(
+                    "Thank you for your Feedback",
+                    style: TextStyle(fontSize: 28),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ]),
         bottomNavigationBar: Text("Bottom Nav Bar Text"),
       ),
     );
