@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "./question.dart";
-import "./answer.dart";
+import "./result.dart";
+import "./quiz.dart";
 
 // void main() {
 //   runApp(AbrarApp());
@@ -17,7 +17,7 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State {
   //State to be used in a Stateful Widget
-  static const questions = [
+  static const _questions = [
     {
       'questionText': 'What is your favourite editor or IDE?',
       'answers': [
@@ -53,7 +53,7 @@ class _DemoAppState extends State {
     setState(() {
       _questionIndex++;
     });
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print("Answer Submitted!");
       return;
     }
@@ -70,27 +70,13 @@ class _DemoAppState extends State {
             "Test Appbar Title",
           ),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(questions[_questionIndex]['questionText'] as String),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answerText) {
-                    return Answer(answerText, _submitAnswer);
-                  }).toList(),
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                questions: _questions,
+                questionIndex: _questionIndex,
+                submitAnswer: _submitAnswer,
               )
-            : Column(children: [
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.all(10),
-                  child: Text(
-                    "Thank you for your Feedback",
-                    style: TextStyle(fontSize: 28),
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              ]),
+            : Result(),
         bottomNavigationBar: Text("Bottom Nav Bar Text"),
       ),
     );
