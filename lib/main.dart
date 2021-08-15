@@ -21,37 +21,39 @@ class _DemoAppState extends State {
     {
       'questionText': 'What is your favourite editor or IDE?',
       'answers': [
-        'VS Code',
-        'Jetbrains IDEs',
-        'X-Code',
-        'Atom',
+        {'text': 'Jetbrains IDEs', 'score': 7},
+        {'text': 'VS Code', 'score': 10},
+        {'text': 'X-Code', 'score': 5},
+        {'text': 'Atom', 'score': 2},
       ]
     },
     {
       'questionText': 'Which one do you prefer for Mobile App?',
       'answers': [
-        'React Native',
-        'Flutter',
-        'Native Apis',
-        'Ionic',
+        {'text': 'React Native', 'score': 10},
+        {'text': 'Native Apis', 'score': 7},
+        {'text': 'Flutter', 'score': 10},
+        {'text': 'Ionic', 'score': 2},
       ]
     },
     {
       'questionText': 'What is you preferred Backend Framework/Stack?',
       'answers': [
-        'Spring Boot',
-        'Express JS',
-        'Django',
-        'Oak Deno JS',
-        'Apollo JS',
+        {'text': 'Spring Boot', 'score': 7},
+        {'text': 'Express JS', 'score': 10},
+        {'text': 'Django', 'score': 5},
+        {'text': 'Oak Deno JS', 'score': 10},
+        {'text': 'Apollo JS', 'score': 10},
       ]
     }
   ]; //type inferencing works by deafult
   var _questionIndex = 0;
+  var _score = 0;
 
-  void _submitAnswer() {
+  void _submitAnswer(int score) {
     setState(() {
       _questionIndex++;
+      _score += score;
     });
     if (_questionIndex < _questions.length) {
       print("Answer Submitted!");
@@ -76,7 +78,7 @@ class _DemoAppState extends State {
                 questionIndex: _questionIndex,
                 submitAnswer: _submitAnswer,
               )
-            : Result(),
+            : Result(_score),
         bottomNavigationBar: Text("Bottom Nav Bar Text"),
       ),
     );
