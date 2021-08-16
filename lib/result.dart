@@ -3,8 +3,9 @@ import "./centeredText.dart";
 
 class Result extends StatelessWidget {
   final int score;
+  final VoidCallback resetQuiz;
 
-  Result(this.score);
+  Result(this.score, this.resetQuiz);
 
   String get resultPhrase {
     if (score >= 27) {
@@ -19,9 +20,19 @@ class Result extends StatelessWidget {
   Widget build(BuildContext context) {
     print(score);
     return Center(
-        child: CenteredText(
+        child: Column(
+      children: [
+        CenteredText(
             fontSize: 30,
             text: "Your Score: " + score.toString() + "\n" + resultPhrase,
-            bold: true));
+            bold: true),
+        TextButton(
+            onPressed: resetQuiz,
+            child: CenteredText(
+              fontSize: 20,
+              text: "Reset Quiz",
+            ))
+      ],
+    ));
   }
 }

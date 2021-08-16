@@ -62,6 +62,13 @@ class _DemoAppState extends State {
     print("Questionnaire completed!");
   }
 
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _score = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // List<String> questions = ['Q1', 'Q2'];
@@ -78,7 +85,7 @@ class _DemoAppState extends State {
                 questionIndex: _questionIndex,
                 submitAnswer: _submitAnswer,
               )
-            : Result(_score),
+            : Result(_score, _resetQuiz),
         bottomNavigationBar: Text("Bottom Nav Bar Text"),
       ),
     );
