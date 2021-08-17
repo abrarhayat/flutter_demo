@@ -86,7 +86,13 @@ class _DemoAppState extends State {
                 submitAnswer: _submitAnswer,
               )
             : Result(_score, _resetQuiz),
-        bottomNavigationBar: Text("Bottom Nav Bar Text"),
+        bottomNavigationBar: Container(
+          child: Text(
+            "© ${DateTime.now().year} Abrar Hayat",
+            textAlign: TextAlign.center,
+          ),
+          padding: EdgeInsets.all(20),
+        ),
       ),
     );
   }
