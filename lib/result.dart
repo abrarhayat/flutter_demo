@@ -24,7 +24,7 @@ class Result extends StatelessWidget {
       children: [
         CenteredText(
             fontSize: 30,
-            text: "Your Score: " + score.toString() + "\n" + resultPhrase,
+            text: "Your Score: ${score.toString()}\n$resultPhrase",
             bold: true),
         TextButton(
             onPressed: resetQuiz,
